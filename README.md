@@ -2,8 +2,8 @@
 2024 Dcard Backend Intern Assignment
 
 ## Description
-### Implement two API services using Golang and MySQL as the database.  
-### Including two API services, one for POST requests to generate advertisements and another for GET requests to retrieve desired advertisements.
+Implement two API services using Golang and MySQL as the database.  
+Including two API services, one for POST requests to generate advertisements and another for GET requests to retrieve desired advertisements.
 
 ## Requirement
 ### go 1.21.6
@@ -41,7 +41,8 @@ AD_API/
 |-- main.go
 |-- README.md (thisfile)
 ```
-api：Define the complete function.  
-model：Define required  structures.  
-router：Set up the routing configuration for the API endpoints.  
+-api：Define the complete function.  
+-model：Define required  structures.  
+-router：Set up the routing configuration for the API endpoints.  
 
+## Folder Structure
