@@ -13,7 +13,7 @@ func Create(data model.PostBody){
 	
 	db, err := sql.Open(
 		"mysql",	
-		"user01:000000@tcp(127.0.0.1:3306)/dcard",
+		"user01:000000@tcp(127.0.0.1:3306)/dcard_test",
 	)
 	defer func() {
 		if err := db.Close(); err != nil {

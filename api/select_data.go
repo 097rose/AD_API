@@ -15,7 +15,7 @@ import(
 func Select(offset int, limit int, age string, gender int,country string, platform string) model.ResultBody{
 	db, err := sql.Open(
 		"mysql",	
-		"user01:000000@tcp(127.0.0.1:3306)/dcard",
+		"user01:000000@tcp(127.0.0.1:3306)/dcard_test",
 	)
 	
 	if err != nil {

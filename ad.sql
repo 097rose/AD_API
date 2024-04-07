@@ -39,3 +39,7 @@ CREATE TABLE Ad_Platform (
     FOREIGN KEY (adId) REFERENCES Ad(id),
     FOREIGN KEY (platformId) REFERENCES Platform(id)
 );
+
+CREATE USER 'user01'@'localhost' IDENTIFIED BY '000000';
+GRANT ALL PRIVILEGES ON dcard_test.* TO 'user01'@'localhost';
+FLUSH PRIVILEGES;
