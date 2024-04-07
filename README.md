@@ -3,7 +3,9 @@
 
 ## Description
 Implement two API services using Golang and MySQL as the database.  
-Including two API services, one for POST requests to generate advertisements and another for GET requests to retrieve desired advertisements.
+Including two API services, one for POST requests to generate advertisements and another for GET requests to retrieve desired advertisements.  
+Using GIN as web framework and "database/sql" to interact with MySQL database.  
+While the conditions are optional and might be multiple, I used additional tables to store the relation between ads and country.
 
 ## Requirement
 ### go 1.21.6
@@ -42,13 +44,15 @@ AD_API/
 |-- main.go
 |-- README.md (thisfile)
 ```
-- api：Define the complete function.  
-- model：Define required  structures.  
-- router：Set up the routing configuration for the API endpoints.  
+- /api：Define the complete function.  
+- /model：Define required  structures.  
+- /router：Set up the routing configuration for the API endpoints.
+-  ad._test.postman.collection：Postman collection
+-  ad.sql：Init database, create table and user
+-  data.json：Sample request body
 
 ## Run
-Run main.go to build API server
-- port:8800
+Build API server - port:8800
 
 ```
 go run main.go
@@ -56,20 +60,18 @@ go run main.go
 POST request - use data.json for request body
 ```
 curl -X POST -H "Content-Type: application/json" -d "@data.json" http://localhost:8800/api/v1/ad
-
 ```
 GET request 
 - parameter : offset, limit, age, gender, country, platform
 ```
 curl http://127.0.0.1:8800/api/v1/ad?limit=8&age=20
-
 ```
 ### Postman collection
 - create_ad : for post request
 - select_ad : for get request
 
 ## Unit test
-- TestCreste
+- TestCreate
 - TestSelect
 - TestSetupRouter_GET
 - TestSetupRouter_PostRequest
