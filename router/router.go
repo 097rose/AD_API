@@ -14,6 +14,7 @@ import (
 )
 
 func SetupRouter() *gin.Engine {
+    //using gin as web framework
     r := gin.Default()
     r.POST("/api/v1/ad", CreateAD)
     r.GET("/api/v1/ad", SelectAD)
@@ -21,6 +22,7 @@ func SetupRouter() *gin.Engine {
 }
 
 func CreateAD(c *gin.Context) {
+    //some basic validations
     var request model.PostBody
     if err := c.BindJSON(&request); err != nil {
         c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -60,7 +62,7 @@ func CreateAD(c *gin.Context) {
 }
 
 func SelectAD(c *gin.Context) {
-    
+    //define defalt value
     offsetStr := c.DefaultQuery("offset", "0")
     offset, _ := strconv.Atoi(offsetStr)
     limitStr := c.DefaultQuery("limit", "5")
@@ -69,6 +71,8 @@ func SelectAD(c *gin.Context) {
     gender := c.Query("gender")
     country := c.Query("country")
     platform := c.Query("platform")
+    
+    //set to 0 if no gender
     var gen int
 	if gender =="" {
 		gen = 0

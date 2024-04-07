@@ -15,7 +15,7 @@ import(
 func Select(offset int, limit int, age string, gender int,country string, platform string) model.ResultBody{
 	db, err := sql.Open(
 		"mysql",	
-		"user01:000000@tcp(127.0.0.1:3306)/dcard_test",
+		"user01:000000@tcp(127.0.0.1:3306)/dcard",
 	)
 	
 	if err != nil {
@@ -33,16 +33,20 @@ func Select(offset int, limit int, age string, gender int,country string, platfo
 		ageint,_ := strconv.Atoi(age)
 		sqlQuery += fmt.Sprintf(" AND %d BETWEEN a.ageStart AND a.ageEnd", ageint)
 	}
+	//select active ad
 	sqlQuery += " AND NOW() BETWEEN a.startAt AND a.endAt "
 	sqlQuery += fmt.Sprintf(" AND a.gender = %d", gender)
-	
+	//select country 
 	if country != "" {
 		sqlQuery += fmt.Sprintf(" AND co.name = '%s' OR co.name IS NULL", country)
 	}
+	//select platform
 	if platform != "" {
 		sqlQuery += fmt.Sprintf(" AND p.name = '%s' OR p.name IS NULL", platform)
 	}
+	//show by acs
 	sqlQuery += " ORDER BY a.endAt ASC"
+	//limit and offset
 	sqlQuery += fmt.Sprintf(" LIMIT %d OFFSET %d;", limit,offset)
 	fmt.Println(sqlQuery)
 

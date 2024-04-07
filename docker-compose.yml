@@ -1,0 +1,20 @@
+# docker-compose.yml
+
+version: '3'
+
+services:
+  golang_app:
+    build:
+      context: .
+      dockerfile: dockerfile.golang
+    ports:
+      - "8800:8800"
+    depends_on:
+      - mysql_db
+
+  mysql_db:
+    build:
+      context: .
+      dockerfile: dockerfile.mysql
+    ports:
+      - "3306:3306"

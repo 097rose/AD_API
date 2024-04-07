@@ -1,0 +1,13 @@
+# Dockerfile.mysql
+
+# 使用官方 MySQL Docker 镜像作为基础镜像
+FROM mysql:latest
+
+# 设置 MySQL 环境变量（这些变量将被用来创建数据库和用户）
+ENV MYSQL_ROOT_PASSWORD=000000
+ENV MYSQL_DATABASE=dcard
+ENV MYSQL_USER=user01
+ENV MYSQL_PASSWORD=000000
+
+# 将本地初始化 SQL 文件复制到容器中以初始化数据库
+COPY ad.sql /docker-entrypoint-initdb.d/

@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "b1b2937b-ff7f-4f6a-ab3e-39dc73ad53c6",
+		"name": "ad_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32827054"
+	},
+	"item": [
+		{
+			"name": "create_ad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"title\": \"AD 405\",\r\n\"startAt\": \"2023-12-10T03:00:00.000Z\",\r\n\"endAt\": \"2024-06-11T16:00:00.000Z\",\r\n\"conditions\": [\r\n{\r\n\"ageStart\": 10,\r\n\"ageEnd\": 39,\r\n\"country\": [\"TW\", \"JP\"],\r\n\"platform\": [\"android\", \"ios\"]\r\n}\r\n]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8800/api/v1/ad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8800",
+					"path": [
+						"api",
+						"v1",
+						"ad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "select_ad",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8800/api/v1/ad?limit=8",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8800",
+					"path": [
+						"api",
+						"v1",
+						"ad"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

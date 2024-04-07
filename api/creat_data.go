@@ -13,7 +13,7 @@ func Create(data model.PostBody){
 	
 	db, err := sql.Open(
 		"mysql",	
-		"user01:000000@tcp(127.0.0.1:3306)/dcard_test",
+		"user01:000000@tcp(127.0.0.1:3306)/dcard",
 	)
 	defer func() {
 		if err := db.Close(); err != nil {
@@ -44,16 +44,17 @@ func Create(data model.PostBody){
 	endAtTime, _ := time.Parse(time.RFC3339, data.EndAt)
 	st := startAtTime.Format("2006-01-02 15:04:05")
 	et := endAtTime.Format("2006-01-02 15:04:05")
-
+	//insert into ad
 	result, err := db.Exec("INSERT INTO Ad (title, startAt, endAt, ageStart, ageEnd, gender) VALUES (?, ?, ?, ?, ?, ?)", data.Title, st, et, data.Conditions[0].AgeStart, data.Conditions[0].AgeEnd,gender)
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	//get ad_id
 	adID, err := result.LastInsertId()
 	if err != nil {
 		log.Fatal(err)
 	}
+	//insert intp country
 	countries := data.Conditions[0].Country
 	for _, country := range countries {
 		_, err = db.Exec("INSERT IGNORE INTO Country (name) VALUES (?)", country)
@@ -61,7 +62,7 @@ func Create(data model.PostBody){
 			log.Fatal(err)
 		}
 	}
-
+	//insert into country
 	platforms := data.Conditions[0].Platform
 	for _, platform := range platforms {
 		_, err = db.Exec("INSERT IGNORE INTO Platform (name) VALUES (?)", platform)
@@ -69,7 +70,7 @@ func Create(data model.PostBody){
 			log.Fatal(err)
 		}
 	}
-
+    //add connection between ad and country
 
 	for _, country := range countries {
 		_, err = db.Exec("INSERT INTO Ad_Country (adId, countryId) VALUES (?, (SELECT id FROM Country WHERE name = ?))", adID, country)
@@ -77,7 +78,7 @@ func Create(data model.PostBody){
 			log.Fatal(err)
 		}
 	}
-
+	//add connection between ad and platform
 	for _, platform := range platforms {
 		_, err = db.Exec("INSERT INTO Ad_Platform (adId, platformId) VALUES (?, (SELECT id FROM Platform WHERE name = ?))", adID, platform)
 		if err != nil {

@@ -16,17 +16,13 @@ import (
 
 
 func TestCreate(t *testing.T) {
-	// 创建模拟数据库连接
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("error creating mock database: %v", err)
 	}
 	defer db.Close()
 
-	// 设置模拟数据库的预期行为
-	// mock.ExpectExec("INSERT INTO Ad").WillReturnResult(sqlmock.NewResult(1, 1))
-
-	// 假設的輸入數據
+	//using test data
 	testData := model.PostBody{
 		Title: "AD 405",
 		StartAt: "2023-12-10T03:00:00.000Z",
@@ -49,8 +45,7 @@ func TestCreate(t *testing.T) {
 	}
 
 	Create(testData)
-
-	// 检查模拟数据库的期望行为是否满足
+	
 	if err := mock.ExpectationsWereMet(); err != nil {
 		t.Errorf("there were unfulfilled expectations: %s", err)
 	}
